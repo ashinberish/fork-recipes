@@ -1,0 +1,19 @@
+{
+  "name": "fork-recipes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=22.11.0"
+  },
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@9.12.3",
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
+}
