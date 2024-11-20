@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "strict": true,
+    "newLine": "lf",
+    "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "strictBindCallApply": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "exactOptionalPropertyTypes": false,
+    "noImplicitOverride": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    "outDir": "dist",
+    "target": "ES6",
+    "noImplicitAny": false,
+    "strictFunctionTypes": false,
+    "useUnknownInCatchVariables": false,
+    "strictPropertyInitialization": false
+  },
+  "ts-node": {
+    "files": true
+  },
+  "include": ["src"],
+  "exclude": [
+    "node_modules",
+    "build",
+    "worker.js",
+    "setup-tests.ts",
+    "**/*.spec.ts"
+  ]
+}
