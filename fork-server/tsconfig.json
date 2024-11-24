@@ -4,8 +4,8 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "moduleResolution": "NodeNext",
-    "module": "NodeNext",
+    "moduleResolution": "node10",
+    "module": "ES2015",
     "isolatedModules": true,
     "moduleDetection": "force",
     "strict": true,
@@ -30,7 +30,11 @@
     "noImplicitAny": false,
     "strictFunctionTypes": false,
     "useUnknownInCatchVariables": false,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "baseUrl": "src",
+    "paths": {
+      "@/*":["*"]
+    }
   },
   "ts-node": {
     "files": true
@@ -39,8 +43,6 @@
   "exclude": [
     "node_modules",
     "build",
-    "worker.js",
-    "setup-tests.ts",
     "**/*.spec.ts"
   ]
 }
