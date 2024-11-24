@@ -1,6 +1,8 @@
 import { vitePlugin as remix } from "@remix-run/dev";
+//import { defineRoutes } from "@remix-run/dev/dist/config/routes";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+import routes from "./app/routes";
 
 declare module "@remix-run/node" {
   interface Future {
@@ -11,6 +13,9 @@ declare module "@remix-run/node" {
 export default defineConfig({
   plugins: [
     remix({
+      routes(defineRoutes){
+        return defineRoutes((route)=> routes(route))
+      },
       future: {
         v3_fetcherPersist: true,
         v3_relativeSplatPath: true,
@@ -21,4 +26,11 @@ export default defineConfig({
     }),
     tsconfigPaths(),
   ],
+  css:{
+    preprocessorOptions:{
+      scss:{
+        api: 'modern-compiler'
+      }
+    }
+  }
 });
