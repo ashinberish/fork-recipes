@@ -40,7 +40,7 @@ export default function Signup() {
                         />
                     </div>
                     <Button type="submit" className="w-full">
-                        Signup
+                        Continue
                     </Button>
                     <Button variant="outline" className="w-full">
                         Signup with Google

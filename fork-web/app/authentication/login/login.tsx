@@ -10,7 +10,24 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Link } from "@remix-run/react"
 
+import type { MetaFunction } from "@remix-run/node";
+import { useState } from "react"
+
+import { Loader2 } from "lucide-react"
+
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Fork Recipes - Login" },
+  ];
+};
+
 export default function Login() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleLogin = () =>{
+    setIsLoading(true)
+  }
   return (
     <Card className="m-auto max-w-sm">
       <CardHeader>
@@ -26,6 +43,7 @@ export default function Login() {
             <Input
               id="email"
               type="email"
+              disabled={isLoading}
               placeholder="Enter your email"
               required
             />
@@ -37,9 +55,12 @@ export default function Login() {
                 Forgot your password?
               </Link>
             </div>
-            <Input id="password" type="password" placeholder="Enter your password" required />
+            <Input id="password" disabled={isLoading} type="password" placeholder="Enter your password" required />
           </div>
-          <Button type="submit" className="w-full">
+          <Button type="submit" disabled={isLoading} onClick={handleLogin} className="w-full">
+            {isLoading && (
+              <Loader2 className="animate-spin" />
+            )}
             Login
           </Button>
           <Button variant="outline" className="w-full">
