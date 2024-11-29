@@ -1,9 +1,11 @@
 import { AccountActions } from "@/components/account-actions/account-actions"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider } from "@/components/ui/sidebar"
 import { Outlet } from "@remix-run/react"
-import { ChevronRight, Home, LucideIcon, Search, Settings, ShoppingBasket, TrendingUp, UsersRound } from "lucide-react"
+import { Banknote, ChefHat, ChevronRight, Home, LucideIcon, Search, Settings, ShoppingBasket, Sparkles, TrendingUp, UsersRound } from "lucide-react"
 
+// TODO: Fix warning and add svg as component
+import Logo from "/public/logo-light.png";
 export default function FeedsLayout() {
     return (
         <SidebarProvider>
@@ -24,7 +26,7 @@ const user = {
     avatar: 'https://github.com/shadcn.png'
 }
 
-const items = [
+const mainNavItems = [
     {
         title: "Home",
         url: "#",
@@ -46,19 +48,36 @@ const items = [
         icon: ShoppingBasket,
     },
     {
+        title: "Favorites",
+        url: "#",
+        icon: Sparkles
+    },
+    {
         title: "Friends",
         url: "#",
         icon: UsersRound,
     },
-    
+]
+
+const masterChefItems = [
     {
-        title: "Settings",
+        title: "My Recipes",
+        url: "#",
+        icon: ChefHat
+    },
+    {
+        title: "Monetization",
+        url: "#",
+        icon: Banknote,
+    },
+    {
+        title: "Master Chef Settings",
         url: "#",
         icon: Settings,
     },
 ]
 
-import Logo from "public/logo-light.png"
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return (
         <Sidebar collapsible="icon" {...props}>
@@ -79,12 +98,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </SidebarMenuButton>
             </SidebarHeader>
             <SidebarContent>
-                <NavMain items={items} />
+                <NavMain items={mainNavItems} />
                 <SidebarGroup>
                     <SidebarGroupLabel>Master Chef Hub</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            {items.map((item) => (
+                            {masterChefItems.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
                                         <a href={item.url}>
