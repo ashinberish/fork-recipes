@@ -8,7 +8,13 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Link } from "@remix-run/react"
+import { Link, MetaFunction } from "@remix-run/react"
+
+export const meta: MetaFunction = () => {
+    return [
+        { title: "Fork Recipes - Signup" },
+    ];
+};
 
 export default function Signup() {
     return (

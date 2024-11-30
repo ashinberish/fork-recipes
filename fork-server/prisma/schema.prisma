@@ -9,7 +9,7 @@ datasource db {
 }
 
 model User {
-  id                String    @id @default(cuid())
+  uid               String    @id @default(cuid())
   username          String?   @unique
   email             String?   @unique
   dob               DateTime?
@@ -30,7 +30,7 @@ model Flags {
   enabled    Boolean
   created_at DateTime @default(now())
 
-  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user User @relation(fields: [user_id], references: [uid], onDelete: Cascade)
 
   @@unique([user_id, feature])
 }
