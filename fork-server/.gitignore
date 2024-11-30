@@ -2,3 +2,10 @@ node_modules
 
 # environmental files
 .env
+
+#logs
+logs
+*.log
+
+#migrations
+migrations

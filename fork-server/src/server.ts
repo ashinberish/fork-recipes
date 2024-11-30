@@ -17,8 +17,8 @@ async function bootServer(port: number) {
     console.error(error);
     return process.exit(1);
   }
-  return app.listen(() => {
-    console.log(`listening at port: ${port}`);
+  return app.listen(PORT, () => {
+    Logger.success(`API server listening on port: ${port}`);
   });
 }
 

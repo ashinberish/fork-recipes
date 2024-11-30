@@ -1,4 +1,4 @@
-import { ForkServerErrorType } from "@/types/schemas/api";
+import { ForkServerErrorType } from "@/contracts/schemas/api";
 import { isDevEnvironment } from "@/utils/misc";
 import crypto from 'crypto';
 

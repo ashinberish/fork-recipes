@@ -10,6 +10,10 @@ export const limits = {
     userGet: {
         window: "hour",
         max: 60
+    },
+    checkUsernameAvailable: {
+        window: "hour",
+        max: 60
     }
 } satisfies Record<string, RateLimitOptions>;
 

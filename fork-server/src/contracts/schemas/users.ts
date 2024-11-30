@@ -10,4 +10,13 @@ export const UserSchema = z.object({
     profile_picture: z.string().optional(),
     created_at: z.date().optional()
 });
+
+export type GetUserResponse = z.infer<typeof UserSchema>;
+
+export const CheckUserNameSchema = z.object({
+    username: z.string()
+})
+
+export type checkUserNameRequest = z.infer<typeof CheckUserNameSchema>
+
   

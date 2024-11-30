@@ -8,7 +8,7 @@ datasource db {
   url      = env("PRISMA_DB_URL")
 }
 
-model User {
+model Users {
   uid               String    @id @default(cuid())
   username          String?   @unique
   email             String?   @unique
@@ -21,6 +21,8 @@ model User {
   created_at        DateTime? @default(now())
 
   flags Flags[]
+
+  @@map("tbl_users")
 }
 
 model Flags {
@@ -30,7 +32,8 @@ model Flags {
   enabled    Boolean
   created_at DateTime @default(now())
 
-  user User @relation(fields: [user_id], references: [uid], onDelete: Cascade)
+  user Users @relation(fields: [user_id], references: [uid], onDelete: Cascade)
 
   @@unique([user_id, feature])
+  @@map("tbl_flags")
 }

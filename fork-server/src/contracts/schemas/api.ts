@@ -17,6 +17,12 @@ export const ForkServerError = ForkClientError.extend({
 
 export type ForkRecipesResponseType = z.infer<typeof ForkResponseSchema>;
 
+export const ForkRecipesValidationErrorSchema = ForkResponseSchema.extend({
+  validationErrors: z.array(z.string()),
+});
+export type ForkRecipesValidationError = z.infer<typeof ForkRecipesValidationErrorSchema>;
+
+
 export type ForkServerErrorType = z.infer<typeof ForkServerError>;
 
 
