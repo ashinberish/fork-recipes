@@ -1,0 +1,13 @@
+diff --git a/node_modules/@ts-rest/express/src/lib/types.d.ts b/node_modules/@ts-rest/express/src/lib/types.d.ts
+index 59c24bf..55d35ad 100644
+--- a/node_modules/@ts-rest/express/src/lib/types.d.ts
++++ b/node_modules/@ts-rest/express/src/lib/types.d.ts
+@@ -13,7 +13,7 @@ export type AppRouteMutationImplementation<T extends AppRouteMutation> = (input:
+ }) => Promise<ServerInferResponses<T>>;
+ export type AppRouteImplementation<T extends AppRoute> = T extends AppRouteMutation ? AppRouteMutationImplementation<T> : T extends AppRouteQuery ? AppRouteQueryImplementation<T> : never;
+ export type TsRestRequest<T extends AppRouter | AppRoute, F extends FlattenAppRouter<T> = FlattenAppRouter<T>, S extends ServerInferRequest<F> = ServerInferRequest<F>> = Request<'params' extends keyof S ? S['params'] : Express['request']['params'], ServerInferResponseBody<F>, 'body' extends keyof S ? S['body'] : Express['request']['body'], 'query' extends keyof S ? S['query'] : Express['request']['query']> & {
+-    tsRestRoute: F;
++    tsRestRoute: Omit<F, 'path'> & { path: string};
+     headers: 'headers' extends keyof S ? S['headers'] : Express['request']['headers'];
+ };
+ export type TsRestRequestHandler<T extends AppRouter | AppRoute> = (req: TsRestRequest<T>, res: Response, next: NextFunction) => void;

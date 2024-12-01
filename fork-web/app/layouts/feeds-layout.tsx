@@ -6,12 +6,57 @@ import { Banknote, ChefHat, ChevronRight, Home, LucideIcon, Search, Settings, Sh
 
 // TODO: Fix warning and add svg as component
 import Logo from "/public/logo-light.png";
+import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
+import { useEffect, useState } from "react"
+import { Button } from "@/components/ui/button"
 export default function FeedsLayout() {
+
+    const [open, setOpen] = useState(false)
+
+    useEffect(() => {
+        const down = (e: KeyboardEvent) => {
+            if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+                e.preventDefault()
+                setOpen((open) => !open)
+            }
+        }
+
+        document.addEventListener('keydown', down)
+        return () => document.removeEventListener('keydown', down)
+    }, [])
+
     return (
         <SidebarProvider>
             <AppSidebar />
             <main className="w-full">
                 <header className="sticky top-0 flex shrink-0 items-center gap-2 border-b bg-background p-4">
+                    <Button
+                        variant="outline"
+                        className="relative h-9 w-full justify-start text-sm text-muted-foreground rounded-lg sm:pr-12 md:w-40 lg:w-80"
+                        onClick={() => setOpen(true)}
+                    >
+                        <span className="hidden lg:inline-flex">Search Recipes...</span>
+                        <span className="inline-flex lg:hidden">Search...</span>
+                        <kbd className="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
+                            <span className="text-xs">⌘</span>K
+                        </kbd>
+                    </Button>
+                    <CommandDialog open={open} onOpenChange={setOpen}>
+                        <CommandInput placeholder="Type a command or search..." />
+                        <CommandList>
+                            <CommandEmpty>No results found.</CommandEmpty>
+                            <CommandGroup heading="Suggestions">
+                                <CommandItem>
+                                    <Search className="mr-2 h-4 w-4" />
+                                    <span>Search by ingredients</span>
+                                </CommandItem>
+                                <CommandItem>
+                                    <Search className="mr-2 h-4 w-4" />
+                                    <span>Search by chefs</span>
+                                </CommandItem>
+                            </CommandGroup>
+                        </CommandList>
+                    </CommandDialog>
                 </header>
                 <Outlet />
             </main>
@@ -31,11 +76,6 @@ const mainNavItems = [
         title: "Home",
         url: "#",
         icon: Home,
-    },
-    {
-        title: "Search",
-        url: "#",
-        icon: Search,
     },
     {
         title: "Trending",
@@ -87,7 +127,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                 >
                     <div className="flex aspect-square size-12 items-center justify-center rounded-lg text-sidebar-primary-foreground">
-                        <img src={Logo} alt="logo" className="size-12"/>
+                        <img src={Logo} alt="logo" className="size-12" />
                     </div>
                     <div className="grid flex-1 text-left text-base leading-tight">
                         <span className="truncate font-semibold">
@@ -178,3 +218,5 @@ export function NavMain({
         </SidebarGroup>
     )
 }
+
+

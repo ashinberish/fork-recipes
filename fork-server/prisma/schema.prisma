@@ -9,20 +9,32 @@ datasource db {
 }
 
 model Users {
-  uid               String    @id @default(cuid())
-  username          String?   @unique
-  email             String?   @unique
+  uid               String             @id @default(cuid())
+  username          String?            @unique
+  name              String
+  email             String             @unique
   dob               DateTime?
   email_verified_at DateTime?
   last_login        DateTime?
   profile_picture   String?
   deleted_at        DateTime?
   disabled_at       DateTime?
-  created_at        DateTime? @default(now())
-
-  flags Flags[]
+  created_at        DateTime?          @default(now())
+  flags             Flags[]
+  verificationToken VerificationToken? @relation("UserVerificationToken")
 
   @@map("tbl_users")
+}
+
+model VerificationToken {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  uid       String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      Users    @relation("UserVerificationToken", fields: [uid], references: [uid], onDelete: Cascade)
+
+  @@map("tbl_verification_tokens")
 }
 
 model Flags {
