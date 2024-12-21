@@ -4,8 +4,7 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupConte
 import { Outlet } from "@remix-run/react"
 import { Banknote, ChefHat, ChevronRight, Home, LucideIcon, Search, Settings, ShoppingBasket, Sparkles, TrendingUp, UsersRound } from "lucide-react"
 
-// TODO: Fix warning and add svg as component
-import Logo from "/public/logo-light.png";
+import LogoLight from "@/theme/images/logo-light.png";
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
@@ -127,7 +126,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                 >
                     <div className="flex aspect-square size-12 items-center justify-center rounded-lg text-sidebar-primary-foreground">
-                        <img src={Logo} alt="logo" className="size-12" />
+                        <img src={LogoLight} alt="logo" className="size-12" />
                     </div>
                     <div className="grid flex-1 text-left text-base leading-tight">
                         <span className="truncate font-semibold">

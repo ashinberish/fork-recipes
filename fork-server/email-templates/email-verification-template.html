@@ -1,0 +1,96 @@
+<mjml>
+  <mj-head>
+    <mj-style>
+      @import
+      "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css";
+      .btn table{ width: 100%; } .btn a{ width: 100%; padding: 10px 0
+      !important;}
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="#ffffff">
+    <mj-wrapper padding="20px 20px 200px 20px">
+      <mj-section padding="0px" padding-bottom="20px">
+        <mj-column width="600px">
+          <mj-image
+            width="200px"
+            src="https://github.com/ashinberish/fork-recipes/blob/main/fork-web/public/logo-with-name-light.png?raw=true"
+            href="forkrecipes.com"
+            align="left"
+          ></mj-image>
+        </mj-column>
+      </mj-section>
+      <mj-section padding="0px">
+        <mj-column background-color="#fafafa" border-radius="8px">
+          <mj-spacer></mj-spacer>
+
+          <mj-text color="#3f3f46" font-size="20px" font-family="sans-serif">
+            Hey, {{name}}
+          </mj-text>
+          <mj-text
+            color="#3f3f46"
+            font-size="16px"
+            line-height="24px"
+            font-family="sans-serif"
+          >
+            To complete your account setup, please verify your email address by
+            clicking the button below:
+          </mj-text>
+
+          <mj-button
+            align="left"
+            background-color="#27d927"
+            color="#f8fafc"
+            font-size="16px"
+            line-height="32px"
+            css-class="btn"
+            href="{{verificationLink}}"
+            font-family="sans-serif"
+          >
+            Activate your account
+          </mj-button>
+
+          <mj-text
+            color="#3f3f46"
+            font-size="16px"
+            line-height="24px"
+            padding-bottom="0px"
+            font-family="sans-serif"
+          >
+            Cheers,
+          </mj-text>
+          <mj-text
+            color="#3f3f46"
+            font-size="16px"
+            line-height="24px"
+            padding-top="0px"
+            font-family="sans-serif"
+          >
+            Fork Recipes Team
+          </mj-text>
+
+          <mj-divider border-color="#323437"></mj-divider>
+
+          <mj-text
+            color="#646669"
+            font-size="12px"
+            padding-bottom="0px"
+            font-family="sans-serif"
+          >
+            For security reasons, this link is valid for the next 15 minutes. If
+            you didn’t request this, please disregard this email or contact us
+            immediately.
+          </mj-text>
+
+          <mj-spacer></mj-spacer>
+        </mj-column>
+      </mj-section>
+      <mj-section padding-top="0">
+        <mj-column>
+          <mj-text align="center" color="#646669" background-color="#323437">
+            forkrecipes.com
+          </mj-text>
+        </mj-column>
+      </mj-section>
+    </mj-wrapper>
+  </mj-body>
+</mjml>

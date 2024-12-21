@@ -28,7 +28,7 @@ model Users {
 
 model VerificationToken {
   id        Int      @id @default(autoincrement())
-  otp       Int
+  token     String
   uid       String   @unique
   expiresAt DateTime
   createdAt DateTime @default(now())

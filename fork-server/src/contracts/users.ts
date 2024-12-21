@@ -45,18 +45,6 @@ export type CreateUserResponse = z.infer<typeof CreateUserResponseSchema>;
 
 export const usersContract = c.router(
   {
-    // get: {
-    //     summary: "Get user",
-    //     description: "Get a user's data.",
-    //     method: "GET",
-    //     path: "",
-    //     responses: {
-    //         200: responseWithData(UserSchema)
-    //     },
-    //     metadata: meta({
-    //         rateLimit: "userGet"
-    //     })
-    // }, // TODO
     checkUsernameAvailable: {
       summary: 'Check username available',
       description: 'Checks to see if a username is available',
