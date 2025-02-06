@@ -8,6 +8,8 @@ import LogoLight from "@/theme/images/logo-light.png";
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
+import { useTranslation } from "react-i18next"
+
 export default function FeedsLayout() {
 
     const [open, setOpen] = useState(false)
@@ -118,6 +120,12 @@ const masterChefItems = [
 
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+
+    const {i18n} = useTranslation();
+
+    function changeLng(){
+        i18n.changeLanguage(i18n.language === 'en' ? 'fr' : 'en', (error =>( console.log(error))))
+    }
     return (
         <Sidebar collapsible="icon" {...props}>
             <SidebarHeader>
@@ -152,6 +160,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))}
+                            <Button onClick={changeLng}>Change</Button>
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
