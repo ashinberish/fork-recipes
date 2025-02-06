@@ -1,10 +1,11 @@
-import { createTransport, Transporter } from 'nodemailer';
-import Logger from './logger';
-import { isDevEnvironment } from './misc';
-import { join } from 'path';
-import mustache from 'mustache';
-import fs from 'fs';
-import mjml2html from 'mjml';
+import { createTransport, Transporter } from "nodemailer";
+import Logger from "./logger";
+import { isDevEnvironment } from "./misc";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
+import mustache from "mustache";
+import fs from "fs";
+import mjml2html from "mjml";
 
 type EmailMetadataType = {
   subject: string;
@@ -16,14 +17,22 @@ export type EmailTaskContexts = {
     name: string;
     magicLink: string;
   };
+  email_verification: {
+    name: string;
+    verificationLink: string;
+  };
 };
 
-export type EmailType = 'magic_link';
+export type EmailType = "magic_link" | "email_verification";
 
 const templates: Record<EmailType, EmailMetadataType> = {
   magic_link: {
-    subject: '🎉 Your Magic Link Is Here!',
-    template: 'magic-link-template.html',
+    subject: "🎉 Your Magic Link Is Here!",
+    template: "magic-link-template.html",
+  },
+  email_verification: {
+    subject: "🎉 Verify Your Email Address!",
+    template: "email-verification-template.html",
   },
 };
 
@@ -41,21 +50,21 @@ export async function init(): Promise<void> {
 
   const { EMAIL_HOST, EMAIL_USER, EMAIL_PASS, EMAIL_PORT } = process.env;
 
-  if (!(EMAIL_HOST ?? '') || !(EMAIL_USER ?? '') || !(EMAIL_PASS ?? '')) {
+  if (!(EMAIL_HOST ?? "") || !(EMAIL_USER ?? "") || !(EMAIL_PASS ?? "")) {
     if (isDevEnvironment()) {
       Logger.warning(
-        'No email client configuration provided. Running without email.'
+        "No email client configuration provided. Running without email."
       );
       return;
     }
-    throw new Error('No email client configuration provided');
+    throw new Error("No email client configuration provided");
   }
 
   try {
     transporter = createTransport({
       host: EMAIL_HOST,
-      secure: EMAIL_PORT === '465' ? true : false,
-      port: parseInt(EMAIL_PORT ?? '578', 10),
+      secure: EMAIL_PORT === "465" ? true : false,
+      port: parseInt(EMAIL_PORT ?? "578", 10),
       auth: {
         user: EMAIL_USER,
         pass: EMAIL_PASS,
@@ -63,7 +72,7 @@ export async function init(): Promise<void> {
     });
     transportInitialized = true;
 
-    Logger.info('Verifying email client configuration...');
+    Logger.info("Verifying email client configuration...");
     const result = await transporter.verify();
 
     if (!result) {
@@ -72,11 +81,11 @@ export async function init(): Promise<void> {
       );
     }
 
-    Logger.success('Email client configuration verified');
+    Logger.success("Email client configuration verified");
   } catch (error) {
     transportInitialized = false;
-    Logger.error(error ?? 'Unknown error');
-    Logger.error('Failed to verify email client configuration.');
+    Logger.error(error ?? "Unknown error");
+    Logger.error("Failed to verify email client configuration.");
   }
 }
 
@@ -93,14 +102,14 @@ export async function sendEmail(
   if (!isInitialized()) {
     return {
       success: false,
-      message: 'Email client transport not initialized',
+      message: "Email client transport not initialized",
     };
   }
 
   const template = await fillTemplate<typeof templateName>(templateName, data);
 
   const mailOptions = {
-    from: 'Monkeytype <noreply@monkeytype.com>',
+    from: "Acme <onboarding@resend.dev>",
     to,
     subject: templates[templateName].subject,
     html: template,
@@ -114,7 +123,7 @@ export async function sendEmail(
   } catch (e) {
     return {
       success: false,
-      message: e ?? 'Unknown error',
+      message: e ?? "Unknown error",
     };
   }
 
@@ -124,7 +133,8 @@ export async function sendEmail(
   };
 }
 
-const EMAIL_TEMPLATES_DIRECTORY = join(__dirname, '../../email-templates');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const EMAIL_TEMPLATES_DIRECTORY = path.join(__dirname, "../../email-templates");
 
 const cachedTemplates: Record<string, string> = {};
 
@@ -136,7 +146,7 @@ async function getTemplate(name: string): Promise<string> {
 
   const template = await fs.promises.readFile(
     `${EMAIL_TEMPLATES_DIRECTORY}/${name}`,
-    'utf-8'
+    "utf-8"
   );
 
   const html = mjml2html(template).html;

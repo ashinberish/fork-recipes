@@ -7,14 +7,14 @@ export type RateLimitOptions = {
 };
 
 export const limits = {
-    userGet: {
-        window: "hour",
-        max: 60
-    },
-    checkUsernameAvailable: {
-        window: "hour",
-        max: 60
-    }
+  userGet: {
+    window: "hour",
+    max: 60,
+  },
+  checkUsernameAvailable: {
+    window: "hour",
+    max: 60,
+  },
 } satisfies Record<string, RateLimitOptions>;
 
 export type RateLimiterId = keyof typeof limits;

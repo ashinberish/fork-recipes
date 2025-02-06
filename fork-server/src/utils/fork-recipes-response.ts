@@ -1,9 +1,8 @@
 import { ForkRecipesResponseType } from "@/contracts/schemas/api";
 
-
 export type ForkRecipesDataAware<T> = {
-    data: T | null;
-  };
+  data: T | null;
+};
 
 export class ForkRecipesResponse<T = null>
   implements ForkRecipesResponseType, ForkRecipesDataAware<T>

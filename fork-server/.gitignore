@@ -9,3 +9,7 @@ logs
 
 #migrations
 migrations
+
+# Build files
+
+dist/

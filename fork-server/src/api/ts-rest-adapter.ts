@@ -11,7 +11,7 @@ export function callController<
   TResponse,
   //ignoring as it might be used in the future
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
-  TStatus = 200
+  TStatus = 200,
 >(
   handler: ForkRecipesHandler<TQuery, TBody, TParams, TResponse>
 ): (all: TypeSafeTsRestRequest<TRoute, TQuery, TBody, TParams>) => Promise<{
@@ -41,38 +41,37 @@ export function callController<
 }
 
 type WithBody<T> = {
-    body: T;
-  };
-  type WithQuery<T> = {
-    query: T;
-  };
-  
-  type WithParams<T> = {
-    params: T;
-  };
-  
-  type WithoutBody = {
-    body?: never;
-  };
-  type WithoutQuery = {
-    query?: never;
-  };
-  type WithoutParams = {
-    params?: never;
-  };
+  body: T;
+};
+type WithQuery<T> = {
+  query: T;
+};
+
+type WithParams<T> = {
+  params: T;
+};
+
+type WithoutBody = {
+  body?: never;
+};
+type WithoutQuery = {
+  query?: never;
+};
+type WithoutParams = {
+  params?: never;
+};
 
 type ForkRecipesHandler<TQuery, TBody, TParams, TResponse> = (
-    req: ForkRecipesRequest<TQuery, TBody, TParams>
-  ) => Promise<ForkRecipesResponse<TResponse>>;
+  req: ForkRecipesRequest<TQuery, TBody, TParams>
+) => Promise<ForkRecipesResponse<TResponse>>;
 
 type TypeSafeTsRestRequest<
   TRoute extends AppRoute | AppRouter,
   TQuery,
   TBody,
-  TParams
+  TParams,
 > = {
   req: TsRestRequest<TRoute>;
 } & (TQuery extends undefined ? WithoutQuery : WithQuery<TQuery>) &
   (TBody extends undefined ? WithoutBody : WithBody<TBody>) &
   (TParams extends undefined ? WithoutParams : WithParams<TParams>);
-  

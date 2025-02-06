@@ -2,11 +2,11 @@ import {
   ForkRecipesResponseSchema,
   meta,
   responseWithData,
-} from '@/contracts/schemas/api';
-import { UserSchema } from '@/contracts/schemas/users';
-import { ForkRecipesResponse } from '@/utils/fork-recipes-response';
-import { initContract } from '@ts-rest/core';
-import { z } from 'zod';
+} from "@/contracts/schemas/api";
+import { UserSchema } from "@/contracts/schemas/users";
+import { ForkRecipesResponse } from "@/utils/fork-recipes-response";
+import { initContract } from "@ts-rest/core";
+import { z } from "zod";
 
 const c = initContract();
 
@@ -16,7 +16,7 @@ export const UserNameSchema = z
   .max(16)
   .regex(
     /^[\da-zA-Z_-]+$/,
-    'Can only contain lower/uppercase letters, underscare and minus.'
+    "Can only contain lower/uppercase letters, underscare and minus."
   );
 
 export const CheckUsernamePathParametersSchema = z.object({
@@ -46,32 +46,32 @@ export type CreateUserResponse = z.infer<typeof CreateUserResponseSchema>;
 export const usersContract = c.router(
   {
     checkUsernameAvailable: {
-      summary: 'Check username available',
-      description: 'Checks to see if a username is available',
-      method: 'GET',
-      path: '/checkUsernameAvailable/:username',
+      summary: "Check username available",
+      description: "Checks to see if a username is available",
+      method: "GET",
+      path: "/checkUsernameAvailable/:username",
       pathParams: CheckUsernamePathParametersSchema.strict(),
       responses: {
-        200: ForkRecipesResponseSchema.describe('username is available'),
-        409: ForkRecipesResponseSchema.describe('username is not available'),
+        200: ForkRecipesResponseSchema.describe("username is available"),
+        409: ForkRecipesResponseSchema.describe("username is not available"),
       },
       metadata: meta({
-        rateLimit: 'checkUsernameAvailable',
+        rateLimit: "checkUsernameAvailable",
       }),
     },
     createUser: {
-      summary: 'Creates a user',
-      description: 'Creates a unverified user in the system.',
-      method: 'POST',
-      path: '/createUser',
+      summary: "Creates a user",
+      description: "Creates a unverified user in the system.",
+      method: "POST",
+      path: "/createUser",
       body: CreateUserRequestSchema.strict(),
       responses: {
-        200: ForkRecipesResponseSchema.describe('user is created'),
+        200: ForkRecipesResponseSchema.describe("user is created"),
       },
     },
   },
   {
     strictStatusCodes: true,
-    pathPrefix: '/users',
+    pathPrefix: "/users",
   }
 );
