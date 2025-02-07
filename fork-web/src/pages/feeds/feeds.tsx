@@ -1,3 +1,7 @@
+import { useTranslation } from 'react-i18next';
+
 export default function Feeds() {
-  return <>Feeds</>;
+  const { t } = useTranslation();
+
+  return <>{t('feeds')}</>;
 }
