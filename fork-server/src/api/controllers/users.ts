@@ -1,7 +1,5 @@
-import {
-  checkUserNameRequest,
-  GetUserResponse,
-} from "@/contracts/schemas/users";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import { ForkRecipesRequest } from "../types";
 import ForkError from "@/utils/error";
 import * as UserDal from "@/dal/user";
@@ -67,11 +65,40 @@ export async function login(
   req: ForkRecipesRequest<undefined, LoginRequest>
 ): Promise<ForkRecipesResponse<LoginResponse>> {
   try {
+    const { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } = process.env;
     const { email, password } = req.body;
+
+    const user = await UserDal.findUser(email);
+
+    if (!user.password) {
+      throw new ForkError(400, "Invalid login request");
+    }
+
+    let isPasswordMatched = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordMatched) {
+      throw new ForkError(401, "Invalid email/password");
+    }
+
+    const accessToken = jwt.sign(
+      { userId: user.uid, email: user.email },
+      ACCESS_TOKEN_SECRET ?? "",
+      {
+        expiresIn: "1h",
+      }
+    );
+
+    const refreshToken = jwt.sign(
+      { userId: user.uid },
+      REFRESH_TOKEN_SECRET ?? "",
+      {
+        expiresIn: "7d",
+      }
+    );
     return new ForkRecipesResponse("success", {
-      access_token: "",
-      refresh_token: "",
-      email: "",
+      access_token: accessToken,
+      refresh_token: refreshToken,
+      email: user.email,
     });
   } catch (error) {
     throw new ForkError(500, "Oops! Something went wrong in the kitchen.");

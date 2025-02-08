@@ -91,6 +91,7 @@ export const usersContract = c.router(
       body: LoginRequestSchema.strict(),
       responses: {
         200: ForkRecipesResponseSchema.describe("Success"),
+        401: ForkRecipesResponseSchema.describe("Not Authorized"),
       },
     },
   },

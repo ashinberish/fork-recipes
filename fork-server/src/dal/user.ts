@@ -98,3 +98,21 @@ export async function createUser(
     throw new ForkError(500, "Error while creating a user");
   }
 }
+
+export async function findUser(email: string): Promise<Users> {
+  try {
+    const user = await prisma.users.findUnique({
+      where: {
+        email: email,
+        deleted_at: null,
+      },
+    });
+
+    if (user == null) {
+      throw new ForkError(400, "User not found");
+    }
+    return user;
+  } catch (error) {
+    throw new ForkError(500, "Error while creating a user");
+  }
+}
