@@ -43,6 +43,20 @@ export const CreateUserResponseSchema = z.object({
 });
 export type CreateUserResponse = z.infer<typeof CreateUserResponseSchema>;
 
+export const LoginRequestSchema = z.object({
+  email: z.string().email(),
+  password: z.string(),
+});
+
+export type LoginRequest = z.infer<typeof LoginRequestSchema>;
+
+export const LoginResponseSchema = z.object({
+  email: z.string(),
+  access_token: z.string(),
+  refresh_token: z.string(),
+});
+export type LoginResponse = z.infer<typeof LoginResponseSchema>;
+
 export const usersContract = c.router(
   {
     checkUsernameAvailable: {
@@ -67,6 +81,16 @@ export const usersContract = c.router(
       body: CreateUserRequestSchema.strict(),
       responses: {
         200: ForkRecipesResponseSchema.describe("user is created"),
+      },
+    },
+    login: {
+      summary: "Login user",
+      description: "Logging a user in and returns tokens.",
+      method: "POST",
+      path: "/login",
+      body: LoginRequestSchema.strict(),
+      responses: {
+        200: ForkRecipesResponseSchema.describe("Success"),
       },
     },
   },

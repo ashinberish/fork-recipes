@@ -17,6 +17,7 @@
     "@prisma/client": "^5.22.0",
     "@ts-rest/core": "^3.51.0",
     "@ts-rest/express": "^3.51.0",
+    "@ts-rest/open-api": "^3.51.0",
     "@types/nodemailer": "^6.4.17",
     "chalk": "^5.3.0",
     "cors": "^2.8.5",
@@ -26,6 +27,7 @@
     "mustache": "^4.2.0",
     "nodemailer": "^6.9.16",
     "patch-package": "^8.0.0",
+    "swagger-ui-express": "^5.0.1",
     "winston": "^3.17.0",
     "zod": "^3.23.8"
   },

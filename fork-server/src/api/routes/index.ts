@@ -6,15 +6,25 @@ import users from "./users";
 import Logger from "@/utils/logger";
 import { ForkRecipesResponse } from "@/utils/fork-recipes-response";
 import { ForkRecipesValidationError } from "@/contracts/schemas/api";
+import { generateOpenApi } from "@ts-rest/open-api";
+import * as swaggerUi from "swagger-ui-express";
 
 const s = initServer();
 const router = s.router(contract, {
   users,
 });
 
+const openApiDocument = generateOpenApi(contract, {
+  info: {
+    title: "Fork Recipes API",
+    version: "1.0.0",
+  },
+});
+
 export function addApiRoutes(app: Application): void {
   applyTsRestApiRoutes(app);
 
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openApiDocument));
   app.use((req, res) => {
     res
       .status(404)

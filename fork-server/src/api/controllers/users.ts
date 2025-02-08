@@ -10,6 +10,8 @@ import {
   CheckUsernameResponse,
   CreateUserRequest,
   CreateUserResponse,
+  LoginRequest,
+  LoginResponse,
 } from "@/contracts/users";
 import { ForkRecipesResponse } from "@/utils/fork-recipes-response";
 
@@ -55,6 +57,21 @@ export async function createUser(
 
     return new ForkRecipesResponse("User created", {
       verificationCodeSent: true,
+    });
+  } catch (error) {
+    throw new ForkError(500, "Oops! Something went wrong in the kitchen.");
+  }
+}
+
+export async function login(
+  req: ForkRecipesRequest<undefined, LoginRequest>
+): Promise<ForkRecipesResponse<LoginResponse>> {
+  try {
+    const { email, password } = req.body;
+    return new ForkRecipesResponse("success", {
+      access_token: "",
+      refresh_token: "",
+      email: "",
     });
   } catch (error) {
     throw new ForkError(500, "Oops! Something went wrong in the kitchen.");

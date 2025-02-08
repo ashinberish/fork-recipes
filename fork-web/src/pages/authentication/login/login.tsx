@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
-import { Loader2 } from 'lucide-react';
+import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { Link } from 'react-router';
 import AuthService from '@/services/auth';
 import { useTranslation } from 'react-i18next';
@@ -31,6 +31,7 @@ export type LoginFormType = {
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [passwordVisibility, setPasswordVisibility] = useState<boolean>(false);
 
   const { t } = useTranslation();
 
@@ -41,6 +42,7 @@ export default function Login() {
       .email(t('please_enter_valid_email')),
     password: z.string().min(1, t('password_required')),
   });
+
   const loginForm = useForm<LoginFormType>({
     defaultValues: {
       email: '',
@@ -54,11 +56,11 @@ export default function Login() {
       return;
     }
     setIsLoading(true);
-    // if (email === null || password === null) {
-    //   return;
-    // }
-    // await AuthService.login(email, password);
-    // setIsLoading(false);
+
+    const { email, password } = loginForm.getValues();
+    await AuthService.login(email, password);
+
+    setIsLoading(false);
   };
   return (
     <Card className="m-auto max-w-sm">
@@ -102,10 +104,25 @@ export default function Login() {
                         </Link>
                       </div>
                       <FormControl>
-                        <Input
-                          placeholder={`${t('enter_your_password')}`}
-                          {...field}
-                        />
+                        <div className="relative">
+                          <Input
+                            type={passwordVisibility ? 'text' : 'password'}
+                            placeholder={`${t('enter_your_password')}`}
+                            {...field}
+                          />
+                          <span
+                            className="absolute top-0 right-2 h-full flex place-items-center text-muted-foreground cursor-pointer hover:text-black"
+                            onClick={() =>
+                              setPasswordVisibility(!passwordVisibility)
+                            }
+                          >
+                            {passwordVisibility ? (
+                              <Eye size={18} />
+                            ) : (
+                              <EyeOff size={18} />
+                            )}
+                          </span>
+                        </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>

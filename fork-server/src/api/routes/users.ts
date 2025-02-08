@@ -16,4 +16,7 @@ export default s.router(usersContract, {
   createUser: {
     handler: async (r) => callController(UserController.createUser)(r),
   },
+  login: {
+    handler: async (r) => callController(UserController.login)(r),
+  },
 });
