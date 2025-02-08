@@ -1,3 +1,18 @@
 {
-  "feeds": "Flux"
+  "dont_have_an_account_qn_mark": "__STRING_NOT_TRANSLATED__",
+  "email": "__STRING_NOT_TRANSLATED__",
+  "email_required": "__STRING_NOT_TRANSLATED__",
+  "enter_your_email": "__STRING_NOT_TRANSLATED__",
+  "enter_your_password": "__STRING_NOT_TRANSLATED__",
+  "feeds": "Flux",
+  "forgot_your_password_qn_mark": "__STRING_NOT_TRANSLATED__",
+  "login": "__STRING_NOT_TRANSLATED__",
+  "login_intro_desc": "__STRING_NOT_TRANSLATED__",
+  "login_intro_header": "__STRING_NOT_TRANSLATED__",
+  "login_with_apple": "__STRING_NOT_TRANSLATED__",
+  "login_with_google": "__STRING_NOT_TRANSLATED__",
+  "password": "__STRING_NOT_TRANSLATED__",
+  "password_required": "__STRING_NOT_TRANSLATED__",
+  "please_enter_valid_email": "__STRING_NOT_TRANSLATED__",
+  "signup": "__STRING_NOT_TRANSLATED__"
 }

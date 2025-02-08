@@ -1,3 +1,18 @@
 {
-  "feeds": "feeds"
+  "dont_have_an_account_qn_mark": "Don't have an account?",
+  "email": "Email",
+  "email_required": "Email is required",
+  "enter_your_email": "Enter your email",
+  "enter_your_password": "Enter your password",
+  "feeds": "feeds",
+  "forgot_your_password_qn_mark": "Forgot your password?",
+  "login": "Login",
+  "login_intro_desc": "Log in to connect with food lovers and share recipes.",
+  "login_intro_header": "Welcome Back, Foodie!",
+  "login_with_apple": "Login with Apple",
+  "login_with_google": "Login with Google",
+  "password": "Password",
+  "password_required": "Password is required",
+  "please_enter_valid_email": "Please enter a valid email",
+  "signup": "Signup"
 }
