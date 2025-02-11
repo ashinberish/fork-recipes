@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc --build",
-    "dev": "tsx --inspect-brk src/server.ts",
+    "dev": "tsx src/server.ts",
     "postinstall": "patch-package"
   },
   "prisma": {
