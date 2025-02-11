@@ -8,6 +8,9 @@ import { ForkRecipesResponse } from "@/utils/fork-recipes-response";
 import { ForkRecipesValidationError } from "@/contracts/schemas/api";
 import { generateOpenApi } from "@ts-rest/open-api";
 import * as swaggerUi from "swagger-ui-express";
+import { formatDuration } from "@/utils/misc";
+
+const APP_START_TIME = Date.now();
 
 const s = initServer();
 const router = s.router(contract, {
@@ -24,6 +27,14 @@ const openApiDocument = generateOpenApi(contract, {
 export function addApiRoutes(app: Application): void {
   applyTsRestApiRoutes(app);
 
+  app.use("/", (req, res) => {
+    res.status(200).json(
+      new ForkRecipesResponse("ok", {
+        uptime: formatDuration(Date.now() - APP_START_TIME),
+        version: "pre_release v1.0.0", // TODO: get from config
+      })
+    );
+  });
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openApiDocument));
   app.use((req, res) => {
     res
