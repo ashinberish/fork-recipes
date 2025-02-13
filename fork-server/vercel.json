@@ -3,8 +3,7 @@
   "functions": {
     "*.js": {
       "memory": 1024,
-      "includeFiles": ["*", "prisma/schema.prisma"],
-      "excludeFiles": ["node_modules"]
+      "includeFiles": ["*", "prisma/schema.prisma"]
     }
   }
 }
