@@ -2,8 +2,8 @@
   "version": 2,
   "functions": {
     "*.js": {
-      "memory": 1024,
-      "includeFiles": ["*", "prisma/schema.prisma"]
+      "memory": 3009,
+      "maxDuration": 30
     }
   }
 }
