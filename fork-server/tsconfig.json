@@ -25,7 +25,7 @@
     "noImplicitOverride": true,
     "allowUnusedLabels": false,
     "allowUnreachableCode": false,
-    "outDir": "dist",
+    "outDir": "api",
     "target": "ES6",
     "noImplicitAny": false,
     "strictFunctionTypes": false,
