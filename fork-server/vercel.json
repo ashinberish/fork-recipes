@@ -1,19 +1,11 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "dist/index.js",
-      "use": "@vercel/node",
-      "config": { "includeFiles": ["dist/**"] }
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "nodejs22.x",
+      "memory": 1024,
+      "includeFiles": ["api/**/*", "prisma/schema.prisma"],
+      "excludeFiles": ["node_modules/**/*"]
     }
-  ],
-  "routes": [
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/.*",
-      "dest": "index.js"
-    }
-  ]
+  }
 }
