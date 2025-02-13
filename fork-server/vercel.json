@@ -1,10 +1,9 @@
 {
   "version": 2,
   "functions": {
-    "api/**/*.js": {
-      "runtime": "nodejs22.x",
+    "*.js": {
       "memory": 1024,
-      "includeFiles": ["api/**/*", "prisma/schema.prisma"],
+      "includeFiles": ["*", "prisma/schema.prisma"],
       "excludeFiles": ["node_modules"]
     }
   }
