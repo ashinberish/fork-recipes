@@ -23,10 +23,18 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import { AxiosError } from 'axios';
+import { toast } from 'sonner';
 
 export type LoginFormType = {
   email: string;
   password: string;
+};
+
+type ServerResponse = {
+  message: string;
+  success: boolean;
+  errors?: Record<string, string>;
 };
 
 export default function Login() {
@@ -34,6 +42,7 @@ export default function Login() {
   const [passwordVisibility, setPasswordVisibility] = useState<boolean>(false);
 
   const { t } = useTranslation();
+  //const toast = useToast(); // Initialize toast
 
   const loginFormSchema: ZodType<LoginFormType> = z.object({
     email: z
@@ -58,7 +67,27 @@ export default function Login() {
     setIsLoading(true);
 
     const { email, password } = loginForm.getValues();
-    await AuthService.login(email, password);
+    try {
+      const res = await AuthService.login(email, password);
+
+      if (res.success) {
+        toast.success(t('login_success'), {
+          description: t('login_success_desc'),
+        });
+      }
+    } catch (error: unknown) {
+      const errorResponse = error as AxiosError<ServerResponse>;
+      if (errorResponse.response?.status === 401) {
+        toast.error(t('login_failed'), {
+          description: t('invalid_credentials'),
+        });
+      } else {
+        toast.error(t('login_failed'), {
+          description:
+            errorResponse.response?.data?.message || t('something_went_wrong'),
+        });
+      }
+    }
 
     setIsLoading(false);
   };

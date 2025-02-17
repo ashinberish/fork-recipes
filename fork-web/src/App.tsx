@@ -4,6 +4,7 @@ import Login from '@/pages/authentication/login/login';
 import Signup from '@/pages/authentication/signup/signup';
 import FeedsLayout from '@/layouts/feeds-layout';
 import Feeds from '@/pages/feeds/feeds';
+import { Toaster } from '@/components/ui/sonner';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      <Toaster richColors expand closeButton position="top-right" />
     </>
   );
 }

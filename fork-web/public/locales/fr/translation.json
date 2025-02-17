@@ -6,13 +6,18 @@
   "enter_your_password": "__STRING_NOT_TRANSLATED__",
   "feeds": "Flux",
   "forgot_your_password_qn_mark": "__STRING_NOT_TRANSLATED__",
+  "invalid_credentials": "__STRING_NOT_TRANSLATED__",
   "login": "__STRING_NOT_TRANSLATED__",
+  "login_failed": "__STRING_NOT_TRANSLATED__",
   "login_intro_desc": "__STRING_NOT_TRANSLATED__",
   "login_intro_header": "__STRING_NOT_TRANSLATED__",
+  "login_success": "__STRING_NOT_TRANSLATED__",
+  "login_success_desc": "__STRING_NOT_TRANSLATED__",
   "login_with_apple": "__STRING_NOT_TRANSLATED__",
   "login_with_google": "__STRING_NOT_TRANSLATED__",
   "password": "__STRING_NOT_TRANSLATED__",
   "password_required": "__STRING_NOT_TRANSLATED__",
   "please_enter_valid_email": "__STRING_NOT_TRANSLATED__",
-  "signup": "__STRING_NOT_TRANSLATED__"
+  "signup": "__STRING_NOT_TRANSLATED__",
+  "something_went_wrong": "__STRING_NOT_TRANSLATED__"
 }

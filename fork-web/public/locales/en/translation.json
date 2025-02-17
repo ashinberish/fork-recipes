@@ -6,13 +6,18 @@
   "enter_your_password": "Enter your password",
   "feeds": "feeds",
   "forgot_your_password_qn_mark": "Forgot your password?",
+  "invalid_credentials": "Entered email or password is incorrect. Please try again.",
   "login": "Login",
+  "login_failed": "Login failed. Please try again.",
   "login_intro_desc": "Log in to connect with food lovers and share recipes.",
   "login_intro_header": "Welcome Back, Foodie!",
+  "login_success": "Login Success.",
+  "login_success_desc": "You have successfully logged in. Enjoy cooking and sharing recipes with other foodies.",
   "login_with_apple": "Login with Apple",
   "login_with_google": "Login with Google",
   "password": "Password",
   "password_required": "Password is required",
   "please_enter_valid_email": "Please enter a valid email",
-  "signup": "Signup"
+  "signup": "Signup",
+  "something_went_wrong": "Something went wrong. Please try again."
 }

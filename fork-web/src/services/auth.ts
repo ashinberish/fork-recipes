@@ -1,8 +1,14 @@
-import axios from 'axios';
+import { axios } from '@/api';
+
+type ServerResponse = {
+  message: string;
+  success: boolean;
+  errors?: Record<string, string>;
+};
 
 const AuthService = {
-  login: async (email: string, password: string) => {
-    const response = await axios.post(`/auth/login`, {
+  login: async (email: string, password: string): Promise<ServerResponse> => {
+    const response = await axios.post(`/auth/login/`, {
       email,
       password,
     });
