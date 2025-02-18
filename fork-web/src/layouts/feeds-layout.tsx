@@ -46,6 +46,7 @@ import {
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Outlet } from 'react-router';
+import { useAppStore } from '@/stores';
 
 export default function FeedsLayout() {
   const [open, setOpen] = useState(false);
@@ -101,12 +102,6 @@ export default function FeedsLayout() {
   );
 }
 
-const user = {
-  name: 'John Doe',
-  email: 'johndoe@pm.me',
-  avatar: 'https://github.com/shadcn.png',
-};
-
 const mainNavItems = [
   {
     title: 'Home',
@@ -154,6 +149,7 @@ const masterChefItems = [
 ];
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const user = useAppStore((state) => state.user);
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -190,9 +186,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
-        <AccountActions user={user} />
-      </SidebarFooter>
+      <SidebarFooter>{user && <AccountActions user={user} />}</SidebarFooter>
       {/* <SidebarRail /> */}
     </Sidebar>
   );
