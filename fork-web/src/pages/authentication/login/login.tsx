@@ -9,12 +9,12 @@ import {
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
-import { Link, useNavigate } from 'react-router';
+import { Link } from 'react-router';
 import AuthService from '@/services/auth';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
+import { z, ZodType } from 'zod';
 import {
   Form,
   FormControl,
@@ -25,6 +25,11 @@ import {
 } from '@/components/ui/form';
 import { AxiosError } from 'axios';
 import { toast } from 'sonner';
+
+export type LoginFormType = {
+  email: string;
+  password: string;
+};
 
 type ServerResponse = {
   message: string;
@@ -37,9 +42,9 @@ export default function Login() {
   const [passwordVisibility, setPasswordVisibility] = useState<boolean>(false);
 
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  //const toast = useToast(); // Initialize toast
 
-  const loginFormSchema = z.object({
+  const loginFormSchema: ZodType<LoginFormType> = z.object({
     email: z
       .string()
       .min(1, t('email_required'))
@@ -47,20 +52,16 @@ export default function Login() {
     password: z.string().min(1, t('password_required')),
   });
 
-  type LoginFormType = z.infer<typeof loginFormSchema>;
-
   const loginForm = useForm<LoginFormType>({
     defaultValues: {
       email: '',
       password: '',
     },
-    reValidateMode: 'onSubmit',
     resolver: zodResolver(loginFormSchema),
   });
 
   const handleLogin = async () => {
-    const isValid = await loginForm.trigger();
-    if (!isValid) {
+    if (loginForm.formState.isValid!) {
       return;
     }
     setIsLoading(true);
@@ -68,15 +69,12 @@ export default function Login() {
     const { email, password } = loginForm.getValues();
     try {
       const res = await AuthService.login(email, password);
-      await AuthService.initProfile().then(() => {
-        navigate('/');
-      });
+
       if (res.success) {
         toast.success(t('login_success'), {
           description: t('login_success_desc'),
         });
       }
-      setIsLoading(false);
     } catch (error: unknown) {
       const errorResponse = error as AxiosError<ServerResponse>;
       if (errorResponse.response?.status === 401) {
@@ -89,8 +87,9 @@ export default function Login() {
             errorResponse.response?.data?.message || t('something_went_wrong'),
         });
       }
-      setIsLoading(false);
     }
+
+    setIsLoading(false);
   };
   return (
     <Card className="m-auto max-w-sm">
@@ -111,7 +110,6 @@ export default function Login() {
                       <FormLabel>{t('email')}</FormLabel>
                       <FormControl>
                         <Input
-                          autoComplete="username"
                           placeholder={`${t('enter_your_email')}`}
                           {...field}
                         />
@@ -137,7 +135,6 @@ export default function Login() {
                       <FormControl>
                         <div className="relative">
                           <Input
-                            autoComplete="current-password"
                             type={passwordVisibility ? 'text' : 'password'}
                             placeholder={`${t('enter_your_password')}`}
                             {...field}
