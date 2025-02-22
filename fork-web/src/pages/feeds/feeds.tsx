@@ -1,7 +1,9 @@
-import { useTranslation } from 'react-i18next';
+import HorizontalScrollFeed from '@/components/horizontal-feeds/horizontal-scroll-feed';
 
 export default function Feeds() {
-  const { t } = useTranslation();
-
-  return <>{t('feeds')}</>;
+  return (
+    <section>
+      <HorizontalScrollFeed />
+    </section>
+  );
 }
