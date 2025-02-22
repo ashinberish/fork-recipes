@@ -150,6 +150,7 @@ const masterChefItems = [
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const user = useAppStore((state) => state.user);
+  const setUser = useAppStore((state) => state.setUser);
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -186,7 +187,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>{user && <AccountActions user={user} />}</SidebarFooter>
+      <SidebarFooter>{user && <AccountActions user={user} setUser={setUser} />}</SidebarFooter>
       {/* <SidebarRail /> */}
     </Sidebar>
   );

@@ -24,13 +24,31 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar';
 import { User } from '@/types/user';
+import { useNavigate } from 'react-router';
+import { toast } from 'sonner';
+import AuthService from '@/services/auth';
+import { useTranslation } from 'react-i18next';
 
 type AccountActionsProps = {
   user: User;
+  setUser: (user: User | null) => void;
 };
-export function AccountActions({ user }: AccountActionsProps) {
+export function AccountActions({ user, setUser }: AccountActionsProps) {
   const { isMobile } = useSidebar();
 
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+  
+  const handleLogout = async () => {  
+    try {
+      await AuthService.logout();
+      setUser(null);
+      navigate('/auth/login');
+      toast.success(t('logged_out_successfully'));
+    } catch {
+      toast.error(t('failed_to_logout'));
+    }
+  }
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -102,7 +120,7 @@ export function AccountActions({ user }: AccountActionsProps) {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>
               <LogOut />
               Log out
             </DropdownMenuItem>

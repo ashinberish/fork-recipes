@@ -9,7 +9,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import AuthService from '@/services/auth';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
@@ -42,7 +42,7 @@ export default function Login() {
   const [passwordVisibility, setPasswordVisibility] = useState<boolean>(false);
 
   const { t } = useTranslation();
-  //const toast = useToast(); // Initialize toast
+  const navigate = useNavigate();
 
   const loginFormSchema: ZodType<LoginFormType> = z.object({
     email: z
@@ -71,6 +71,10 @@ export default function Login() {
       const res = await AuthService.login(email, password);
 
       if (res.success) {
+        const initalized = await AuthService.initProfile();
+        if (initalized) {
+          navigate('/', { replace: true });
+        }
         toast.success(t('login_success'), {
           description: t('login_success_desc'),
         });
