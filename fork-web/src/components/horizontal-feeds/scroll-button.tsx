@@ -10,11 +10,7 @@ export default function ScrollButton({
   onClick,
 }: ScrollButtonProps) {
   return (
-    <Button
-      variant="outline"
-      className={`absolute ${direction === 'left' ? 'left-0' : 'right-0'} z-10 p-2 bg-white shadow-md rounded-full`}
-      onClick={onClick}
-    >
+    <Button variant="outline" onClick={onClick}>
       {direction === 'left' ? (
         <ChevronLeft size={24} />
       ) : (

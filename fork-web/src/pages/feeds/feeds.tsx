@@ -1,8 +1,10 @@
 import HorizontalScrollFeed from '@/components/horizontal-feeds/horizontal-scroll-feed';
 
+import './feeds.scss';
+
 export default function Feeds() {
   return (
-    <section>
+    <section className="feeds-sections">
       <HorizontalScrollFeed />
     </section>
   );
