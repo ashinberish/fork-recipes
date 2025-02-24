@@ -5,7 +5,7 @@ import './feeds.scss';
 export default function Feeds() {
   return (
     <section className="feeds-sections">
-      <HorizontalScrollFeed />
+      <HorizontalScrollFeed headerLabel="Trending Recipes" />
     </section>
   );
 }

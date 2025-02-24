@@ -5,7 +5,11 @@ import ScrollButton from './scroll-button';
 import RecipesService from '@/services/recipes';
 import { Button } from '../ui/button';
 
-export default function HorizontalScrollFeed() {
+export default function HorizontalScrollFeed({
+  headerLabel,
+}: {
+  headerLabel: string;
+}) {
   // eslint-disable-next-line
   const [recipes, setRecipes] = useState<any[]>([]);
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -28,7 +32,7 @@ export default function HorizontalScrollFeed() {
   return (
     <div className="relative w-full overflow-hidden">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-bold">Trending Recipes</h2>
+        <h2 className="text-xl font-semibold">{headerLabel}</h2>
         <div className="flex">
           <Button variant="outline" className="mr-2">
             View All
