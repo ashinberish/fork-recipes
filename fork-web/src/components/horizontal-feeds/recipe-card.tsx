@@ -4,7 +4,7 @@ import { Card, CardContent } from '../ui/card';
 //  eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function RecipeCard({ recipe }: any) {
   return (
-    <Card className="min-w-[250px] shadow-lg rounded-lg overflow-hidden">
+    <Card className="min-w-[250px] shadow-md rounded-lg">
       <img
         src={recipe.image}
         alt={recipe.name}

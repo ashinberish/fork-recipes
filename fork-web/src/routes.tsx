@@ -4,20 +4,28 @@ import Login from '@/pages/authentication/login/login';
 import Signup from '@/pages/authentication/signup/signup';
 import FeedsLayout from '@/layouts/feeds-layout';
 import Feeds from '@/pages/feeds/feeds';
+import { AuthGuard } from '@/guards/auth';
 
-function AppRoutes () {
+function AppRoutes() {
   return (
     <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<FeedsLayout />}>
-            <Route index element={<Feeds />} />
-          </Route>
-          <Route path="auth" element={<AuthLayout />}>
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<Signup />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <AuthGuard>
+              <FeedsLayout />
+            </AuthGuard>
+          }
+        >
+          <Route index element={<Feeds />} />
+        </Route>
+        <Route path="auth" element={<AuthLayout />}>
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
